@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>M Zubair - DevOps Project</title>
+  <style>
+    /* Adding some basic styling to match your previous layout */
+    header, footer { background-color: #333; color: white; text-align: center; padding: 10px; }
+    section { display: flex; padding: 20px; }
+    article { flex: 3; }
+    nav { flex: 1; background: #f1f1f1; padding: 10px; display: none; } /* Hidden as links were removed */
+    @media (max-width: 600px) { section { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>DevOps Project by M Zubair</h2>
+</header>
+
+<section>
+  <article>
+    <h1>Project Agenda: Kubernetes Deployment</h1>
+    <p>This project demonstrates a fully containerized Python application running on a production-ready environment.</p>
+    
+    <h3>Technical Implementation:</h3>
+    <ul>
+      <li><strong>Docker:</strong> Used for containerizing the Python web application into a portable image.</li>
+      <li><strong>Minikube:</strong> Orchestrating the local Kubernetes cluster on an AWS EC2 t3.micro instance.</li>
+      <li><strong>Deployments:</strong> Managing 2 replicas of the application to ensure high availability and self-healing.</li>
+      <li><strong>Services:</strong> Using a NodePort Service to load balance traffic across pods and expose the app to the internet.</li>
+    </ul>
+    
+    <p>This setup showcases the complete CI/CD flow from code to a running Kubernetes cluster.</p>
+  </article>
+</section>
+
+<footer>
+  <p>&copy; 2024 M Zubair | DevOps Zero-to-Hero</p>
+</footer>
+
+</body>
+</html>
