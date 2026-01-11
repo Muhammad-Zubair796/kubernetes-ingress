@@ -1,23 +1,87 @@
-# High-Availability Python Web App on Kubernetes (AWS)
+# Kubernetes Ingress Portfolio Project
 
-## 👤 Author: M Zubair
+**Author:** Muhammad Zubair  
+**Project:** High-Availability Python Web App on Kubernetes with Ingress  
+**Purpose:** Demonstrates host/path-based routing using Kubernetes Ingress with ClusterIP services.
 
-## 🚀 Project Overview
-This project showcases a production-ready deployment of a Python application using **Kubernetes**. I moved beyond simple Docker containers to build a self-healing, load-balanced infrastructure on an **AWS EC2** instance.
+---
 
-## 🛠️ Tech Stack
-* **Infrastructure:** AWS EC2 (Ubuntu 24.04, t3.micro)
-* **Orchestration:** Kubernetes (Minikube)
-* **Containerization:** Docker
-* **Language:** Python / Django
+## Project Overview
 
-## 💡 Key Features Demonstrated
-1.  **Self-Healing:** If a pod is deleted or crashes, Kubernetes automatically recreates it to maintain the desired state (2 replicas).
-2.  **Load Balancing:** A `NodePort` service distributes traffic across multiple instances of the app.
-3.  **Zero-Downtime Updates:** Implemented a rolling update strategy to move from `v1` to `v2` of the app.
+This project showcases:
 
-## 📸 Proof of Concept
-*(Note: I will upload my screenshots here)*
-* **Cluster Status:** `kubectl get all`
-* **Auto-Healing:** `kubectl delete pod` and watching the replacement.
-* **Live App:** Running at `http://13.49.148.165:8080/demo/`
+- Deploying a Python/Django web application on Kubernetes
+- Exposing it using **ClusterIP services** (internal)
+- Routing external traffic through **NGINX Ingress controller**
+- Using **host and path-based routing**
+- Single IP access for multiple services
+- Cost-efficient architecture (no LoadBalancer per service)
+
+---
+
+## Files in the Repository
+
+| File | Description |
+|------|-------------|
+| `deployment.yml` | Kubernetes Deployment manifest for Python/Django app |
+| `service.yml` | ClusterIP Service manifest |
+| `ingress.yml` | Ingress manifest with host/path routing |
+| `Dockerfile` | Dockerfile for building the Python web app image |
+| `requirements.txt` | Python dependencies |
+| `README.md` | This file |
+| `notes.md` | Step-by-step notes and explanations |
+
+---
+
+## Steps Performed
+
+### 1. Created Kubernetes Deployment
+
+```bash
+kubectl apply -f deployment.yml
+kubectl get pods
+```
+
+### 2. Exposed Deployment via ClusterIP Service
+```bash
+kubectl apply -f service.yml
+kubectl get svc
+```
+### 3. Installed NGINX Ingress Controller
+```bash
+minikube addons enable ingress
+kubectl get pods -n ingress-nginx
+```
+### 4. Created Ingress Resource
+```bash
+kubectl apply -f ingress.yml
+kubectl get ingress
+```
+### 5. Configured /etc/hosts for local testing
+```bash
+sudo vi /etc/hosts
+```
+### 6. Tested Access
+```bash
+curl http://app.example.com/demo/
+```
+## Diagram: Traffic Flow
+
+[ Browser / Client ]
+        |
+        v
++--------------------------+
+|   Ingress Controller     |  <- NGINX, single external IP
++--------------------------+
+        |
+        v
++--------------------------+
+|        Service           |  <- ClusterIP
++--------------------------+
+        |
+        v
++--------------------------+
+|        Pods              |  <- Django app deployment
++--------------------------+
+
+
