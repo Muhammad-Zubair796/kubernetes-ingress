@@ -65,23 +65,5 @@ sudo vi /etc/hosts
 ```bash
 curl http://app.example.com/demo/
 ```
-## Diagram: Traffic Flow
-
-[ Browser / Client ]
-        |
-        v
-+--------------------------+
-|   Ingress Controller     |  <- NGINX, single external IP
-+--------------------------+
-        |
-        v
-+--------------------------+
-|        Service           |  <- ClusterIP
-+--------------------------+
-        |
-        v
-+--------------------------+
-|        Pods              |  <- Django app deployment
-+--------------------------+
 
 
